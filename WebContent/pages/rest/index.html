@@ -1,0 +1,357 @@
+<!doctype html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="import" href="/bower_components/iron-collapse/iron-collapse.html" >
+
+    <style>
+      .heading {
+        padding: 10px 15px;
+        margin-top: 20px;
+        background-color: #f3f3f3;
+        border: 1px solid #dedede;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        width: 100%;
+        text-align: left;
+      }
+      .content {
+        padding: 15px;
+        border: 1px solid #dedede;
+        border-top: none;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+      #collapse3 {
+        max-height: 250px;
+      }
+      
+      .restDoc {
+		table-layout:fixed;
+    	width:100%;
+	   }
+
+	   .restDoc th,td {
+    		border-bottom: 1px solid #ddd;
+    		overflow:hidden;
+		}
+	
+	.paramTable {
+		table-layout:fixed;
+    	width:100%;
+	   }
+
+	.paramTable th, .paramTable td {
+    	border-top: 1px solid black;
+    	border-bottom: 1px solid black;
+    	overflow:hidden;
+	}
+    </style>
+
+  </head>
+  <body unresolved>
+  <template is="dom-bind">
+
+	<!-- Resource REST Service -->
+    <button class="heading" aria-expanded$="[[isExpanded(resourceCollapse)]]" aria-controls="resourceCollapse" onclick="toggle('#resourceCollapse')">Resource REST Service</button>
+    <iron-collapse id="resourceCollapse" tabindex="0" opened="{{resourceCollapse}}">
+      <div class="content">
+      	<p>The resource result service provides information about the different resources available to the user. 
+		</p>
+<table class="restDoc">
+  <tr>
+    <th>URI</th>
+    <th>Description</th>
+    <th>Parameters</th> 
+  </tr>
+  <tr>
+    <td>/resourceService/resources</td>
+    <td>Returns a list of available resources</td> 
+    <td><i>None</i></td>
+  </tr>
+  <tr>
+    <td>/resourceService/queryResources</td>
+    <td>Returns a list of the query resources</td> 
+    <td><i>None</i></td>
+  </tr>
+  <tr>
+    <td>/resourceService/processResources</td>
+    <td>Returns a list of the process resources</td> 
+    <td><i>None</i></td>
+  </tr>
+  <tr>
+    <td>/resourceService/path/{resource}{path:.*}</td>
+    <td>Returns a JSON Array of Paths from a given resource, path, and relationship. The default relationship type is CHILD. If the path is empty then it returns the path root of the resource.</td> 
+    <td>
+    	<table class="paramTable">
+    		<tr>
+    			<td>resourceName</td>
+    			<td>Name of the resource</td>
+    		</tr>
+    		<tr>
+    			<td>path</td>
+    			<td>Base Path</td>
+    		</tr>
+    		<tr>
+    			<td>relationship</td>
+    			<td>Relationship type</td>
+    		</tr>
+    	</table>
+    </td>
+  </tr>
+</table>
+      </div>
+    </iron-collapse>
+    
+    <!-- Query RESTful Service -->
+    <button class="heading" aria-expanded$="[[isExpanded(queryCollapse)]]" aria-controls="queryCollapse" onclick="toggle('#queryCollapse')">Query RESTful Service</button>
+    <iron-collapse id="queryCollapse" tabindex="0" opened="{{respourceCollapse}}">
+      <div class="content">
+<p>This service is conversation scoped all requests for working with a query must include the conversation id that represents the query. An end user may have multiple queries going along the same time.
+</p>
+<table class="restDoc">
+  <tr>
+    <th>URI</th>
+    <th>Description</th>
+    <th>Parameters</th>
+  </tr>
+  <tr>
+    <td>/queryRESTService/startQuery</td>
+    <td>Initiates the creation of a query</td> 
+    <td><i>None</i></td>
+  </tr>
+  <tr>
+    <td>/queryRESTService/selectClause</td>
+    <td>Adds a select clause to the query</td> 
+    <td>
+		<table class="paramTable">
+    		<tr>
+    			<td>cid</td>
+    			<td>Conversation id</td>
+    		</tr>
+    		<tr>
+    			<td>field</td>
+    			<td>Parameter name</td>
+    		</tr>
+    		<tr>
+    			<td>alias</td>
+    			<td>Parameter alias</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/queryRESTService/whereClause</td>
+    <td>Adds or edits a where clause</td> 
+    <td>
+		<table class="paramTable">
+    		<tr>
+    			<td>cid</td>
+    			<td>Conversation id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/queryRESTService/deleteClause</td>
+    <td>Deletes a given clause</td> 
+    <td>
+		<table class="paramTable">
+    		<tr>
+    			<td>cid</td>
+    			<td>Conversation id</td>
+    		</tr>
+    		<tr>
+    			<td>clauseId</td>
+    			<td>Clause id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/queryRESTService/runQuery</td>
+    <td>Runs the query created by the rest service</td> 
+    <td>
+		<table class="paramTable">
+    		<tr>
+    			<td>cid</td>
+    			<td>Conversation id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/queryRESTService/cancelQuery</td>
+    <td>Cancels the given query</td> 
+    <td>
+		<table class="paramTable">
+    		<tr>
+    			<td>cid</td>
+    			<td>Conversation id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+</table>
+      </div>
+    </iron-collapse>
+    
+    <!-- Process RESTful Service -->
+    <button class="heading" aria-expanded$="[[isExpanded(processCollapse)]]" aria-controls="processCollapse" onclick="toggle('#processCollapse')">Process RESTful Service</button>
+    <iron-collapse id="processCollapse" tabindex="0" opened="{{processCollapse}}">
+      <div class="content">
+<p>Creates the process service for the JAX-RS REST service. This service is conversation scoped all requests for working with a process must include the conversation id that represents the query. An end user may have multiple queries going along the same time.
+</p>
+<table class="restDoc">
+  <tr>
+    <th>URI</th>
+    <th>Description</th> 
+    <th>Parameters</th>
+  </tr>
+  <tr>
+    <td>/processRESTService/startProcess</td>
+    <td>Initiates the creation of a process</td> 
+    <td><i>None</i>
+	</td>
+  </tr>
+  <tr>
+    <td>/processRESTService/updateProcess</td>
+    <td>Updates a process</td> 
+    <td>
+		<table class="paramTable">
+    		<tr>
+    			<td>cid</td>
+    			<td>Conversation id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/processRESTService/runProcess</td>
+    <td>Runs a process</td> 
+    <td>
+		<table class="paramTable">
+    		<tr>
+    			<td>cid</td>
+    			<td>Conversation id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/processRESTService/cancelProcess</td>
+    <td>Attempts to cancel a process</td> 
+    <td>
+		<table class="paramTable">
+    		<tr>
+    			<td>cid</td>
+    			<td>Conversation id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+</table>
+      </div>
+    </iron-collapse>
+    
+    <!-- Result REST Service -->
+    <button class="heading" aria-expanded$="[[isExpanded(resultCollapse)]]" aria-controls="resultCollapse" onclick="toggle('#resultCollapse')">Result REST Service</button>
+    <iron-collapse id="resultCollapse" tabindex="0" opened="{{resultCollapse}}">
+      <div class="content">
+<p>The result service provides information about the different resources available to the user.
+</p>
+<table class="restDoc">
+  <tr>
+    <th>URI</th>
+    <th>Description</th>
+    <th>Parameters</th>
+  </tr>
+  <tr>
+    <td>/resultService/availableFormats</td>
+    <td>Returns a JSON Array list of available formats that can be returned by this service</td> 
+    <td><i>None</i></td>
+  </tr>
+  <tr>
+    <td>/resultService/result/json/{id}</td>
+    <td>Returns a JSON representation of the result</td> 
+    <td>
+    	<table class="paramTable">
+    		<tr>
+    			<td>id</td>
+    			<td>Result id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/resultService/download/json/{id}</td>
+    <td>Returns a JSON representation of the result set as an attachment. It streams the response to lessen the memory footprint.</td> 
+    <td>
+    	<table class="paramTable">
+    		<tr>
+    			<td>id</td>
+    			<td>Result id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/resultService/download/xml/{id}</td>
+    <td>Returns an XML representation of the result set as an attachment. It streams the response to lessen the memory footprint.</td> 
+    <td>
+    	<table class="paramTable">
+    		<tr>
+    			<td>id</td>
+    			<td>Result id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/resultService/download/xlsx/{id}</td>
+    <td>Returns an XSLX representation of the result set as an attachment. It streams the response to lessen the memory footprint.</td> 
+    <td>
+    	<table class="paramTable">
+    		<tr>
+    			<td>id</td>
+    			<td>Result id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+  <tr>
+    <td>/resultService/download/csv/{id}</td>
+    <td>Returns an CSV representation of the result set as an attachment. It streams the response to lessen the memory footprint.</td> 
+    <td>
+    	<table class="paramTable">
+    		<tr>
+    			<td>id</td>
+    			<td>Result id</td>
+    		</tr>
+    	</table>
+	</td>
+  </tr>
+</table>
+      </div>
+    </iron-collapse>
+</template>
+
+<script>
+	function toggle(selector) {
+		document.querySelector(selector).toggle();
+		document.querySelector(selector).updateSize();
+	}
+	
+	document.querySelector('template[is=dom-bind]').isExpanded = function(opened) {
+		return String(opened);
+	};
+</script>
+<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  </body>
+</html>

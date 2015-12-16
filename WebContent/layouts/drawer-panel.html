@@ -1,0 +1,61 @@
+<link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="/bower_components/paper-menu/paper-submenu.html">
+<link rel="import" href="/bower_components/paper-drawer-panel/paper-drawer-panel.html">
+
+<dom-module id="drawer-panel">
+
+ <template>
+    <style>
+    	.selected {
+			background-color: lightgrey;
+    		font-weight: bold;
+    	}
+    	
+    	paper-item {
+    		cursor: pointer;
+    	}
+    	
+    </style>
+
+
+<paper-drawer-panel id="sideBar">
+    <div drawer>
+		<paper-listbox id="navSideBar" attr-for-selected="page">
+			<paper-item page="/">Home</paper-item>
+			<paper-item page="/example-01">Example</paper-item>
+			<paper-item page="/api-javadoc">API JavaDocs</paper-item>
+			<paper-item page="/cl-javadoc">CL JavaDocs</paper-item>
+			<paper-item page="/ri-javadoc">RI JavaDocs</paper-item>
+			<paper-item page="/rest-doc">REST Docs</paper-item>
+		</paper-listbox>
+	</div>
+	<div main style="overflow-y: scroll">
+		<content></content>
+	</div>
+</paper-drawer-panel>
+ </template>
+
+  <script>
+    Polymer({
+      is: "drawer-panel",
+
+      properties: {
+        greeting: {
+          type: String,
+          value: "Hello!"
+        }
+      },
+      
+      listeners: {
+          'iron-select': 'pushState'
+      },
+      
+      pushState : function(e) {
+		  document.querySelector('app-router').go(this.$.navSideBar.selected, {replace: true});
+      }
+    });
+  </script>
+
+</dom-module>

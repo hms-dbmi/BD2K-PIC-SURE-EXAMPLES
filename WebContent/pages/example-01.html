@@ -1,0 +1,78 @@
+<link rel="import" href="/layouts/drawer-panel.html">
+
+<dom-module id="example-01">
+
+<template>
+<drawer-panel>
+	<div class="content">
+	<div class="chapter">
+		<h3>Example</h3>
+        <p>Download all the variants found in the ExAC resource for the TITF1 gene.</p>
+       	<p><b>Example curl command</b></p>
+       	<code>curl -c cookies.txt -b cookies.txt "http://bd2k-picsure.hms.harvard.edu/IRCT-CL/rest/queryRESTService/startQuery"</code>
+       	<p>The curl command requires the use of the <i>-b</i> and <i>-c</i> flags in order to maintain session state between calls.</p>
+		<table class="exampleTable">
+        	<tr>
+        		<th>Step</th>
+       			<th>Command</th>
+       			<th>Example Output</th>
+       		</tr>
+       		<tr>
+       			<td>Start a query</td>
+       			<td>
+       				<code>/IRCT-CL/rest/queryRESTService/startQuery</code>
+       			</td>
+        		<td>
+        				<code>{"status":"OK",
+        			"cid":"2","version":"1.0"}
+        			</code>
+        		</td>
+       		</tr>
+       		<tr>
+       			<td>Add where clause</td>
+       			<td>
+       				Replace the &lt;CID> with the cid number that was returned from your startQuery command.
+       				<code>/IRCT-CL/rest/queryRESTService/whereClause?type=where&field=ExAC%2Fgene%2Fvariants_in_gene&logicalOperator=AND&predicate=BYQUERY&data-query=titf1&cid=&ltCID></code>
+       			</td>
+       			<td>
+        			<code>{"status":"OK","clauseId":0}</code>
+        		</td>
+        	</tr>
+        	<tr>
+       			<td>Run Query</td>
+       			<td>
+       				Replace the &lt;CID> with the cid number that was returned from your startQuery command.
+       				<code>/IRCT-CL/rest/queryRESTService/runQuery?cid=&ltCID></code>
+       			</td>
+       			<td>
+       				<code>{"resultId":52}</code>
+       			</td>
+        	</tr>
+        	<tr>
+       			<td>Download Results</td>
+       			<td>
+       				Replace the &lt;RESULT_ID> with the result id number that was returned from your runQuery command.
+       				<code>/IRCT-CL/rest/resultService/download/csv/&lt;RESULT_ID></code>
+       			</td>
+       			<td>
+       				The results will be downloaded in CSV format
+       			</td>
+        	</tr>
+		</table>
+	</div>
+	</div>
+</drawer-panel>
+</template>
+  <script>
+    Polymer({
+      is: "example-01",
+
+      properties: {
+        greeting: {
+          type: String,
+          value: "Hello!"
+        }
+      }
+    });
+  </script>
+</dom-module>

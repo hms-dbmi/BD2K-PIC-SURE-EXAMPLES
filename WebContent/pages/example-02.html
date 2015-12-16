@@ -1,0 +1,22 @@
+<link rel="import" href="/layouts/drawer-panel.html">
+
+<dom-module id="example-02">
+
+<template>
+<drawer-panel>
+      <div class="title">Example 02</div>
+</drawer-panel>
+</template>
+  <script>
+    Polymer({
+      is: "example-02",
+
+      properties: {
+        greeting: {
+          type: String,
+          value: "Hello!"
+        }
+      }
+    });
+  </script>
+</dom-module>

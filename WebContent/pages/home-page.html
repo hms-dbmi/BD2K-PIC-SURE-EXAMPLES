@@ -1,0 +1,75 @@
+<link rel="import" href="/layouts/drawer-panel.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
+<link rel="import" href="/bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
+
+<dom-module id="home-page">
+
+<template>
+<style>
+.inherit {
+  color: inherit;
+  background-color: inherit;
+  text-decoration: inherit;
+}
+</style>
+<drawer-panel>
+	<div class="content">
+
+	<div class="chapter">
+      <h2>BD2K PIC-SURE RESTful API</h2>
+      <p>Harvard University Medical School (HMS) Patient-Centered Informatics Common: Standardized Unification of Research Elements (PIC-SURE) is developing an open-source infrastructure that will foster the incorporation of multiple heterogeneous patient level clinical, omics and environment datasets.. This system embraces the idea of decentralized datasets of varying types, and the protocols used to access them while still providing a simple communication layer that can handle querying, joining, and computing on. The BD2K PIC-SURE RESTful API implementation is called Inter Resource Communication Tool (IRCT).</p>
+      <!-- LINKS -->
+      
+      <a href="http://www.pic-sure.org/" target="_blank" class="inherit">
+      	<paper-button raised>Learn more about PIC-SURE</paper-button>
+      </a>
+      
+      <a href="/example-01" class="inherit">
+      	<paper-button raised>Try it out</paper-button>
+      </a>
+      
+      <p>You can view the source code on GitHub by clicking any of the links below.</p>
+    </div>
+    <div class="layout horizontal wrap">
+    	<paper-card heading="IRCT-CL" style="width: 33%">
+  			<div class="card-content">The IRCT Communication Layer (IRCT-CL) provides a resource agnostic REpresentative State Transfer (RESTful) service. Users build queries by making a series of calls to the RESTful service that can span multiple datasets and resources.</div>
+  			<div class="card-actions">
+  				<a href="https://github.com/hms-dbmi/IRCT-CL" target="_blank" class="inherit">
+    				<paper-button>GitHub</paper-button>
+    			</a>
+  			</div>
+		</paper-card>
+    	<paper-card heading="IRCT-API" style="width: 33%">
+  			<div class="card-content">The IRCT Application Programming Interface (IRCT-API) is the core of the IRCT project. It manages the queries for data, and processing across the different resources.</div>
+  			<div class="card-actions">
+    			<a href="https://github.com/hms-dbmi/IRCT-API" target="_blank" class="inherit">
+    				<paper-button>GitHub</paper-button>
+    			</a>
+  			</div>
+		</paper-card>
+    	<paper-card heading="IRCT-RI" style="width: 33%">
+  			<div class="card-content">The IRCT Resource Interface (IRCT-RI) provides a way of connecting tht IRCT application to different resources for querying. Included in the project are interfaces to both i2b2, i2b2/tranSMART, and the ExAC browser.</div>
+  			<div class="card-actions">
+    			<a href="https://github.com/hms-dbmi/IRCT-RI" target="_blank" class="inherit">
+    				<paper-button>GitHub</paper-button>
+    			</a>
+  			</div>
+		</paper-card>
+    </div>
+</div>
+</drawer-panel>
+</template>
+  <script>
+    Polymer({
+      is: "home-page",
+
+      properties: {
+        greeting: {
+          type: String,
+          value: "Hello!"
+        }
+      }
+    });
+  </script>
+</dom-module>
